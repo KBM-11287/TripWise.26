@@ -5,7 +5,7 @@ using TripWise.Api.Models;
 using TripWise.Api.Models.Dto;
 using TripWise.Api.Repositories;
 using Asp.Versioning;
-
+using System.IdentityModel.Tokens.Jwt;
 
 namespace TripWise.Api.Controllers
 {
@@ -23,7 +23,7 @@ namespace TripWise.Api.Controllers
         }
 
         // Helper to get logged-in user ID from JWT
-        private string GetUserId()
+        private string? GetUserId()
         {
             return User.FindFirstValue(ClaimTypes.NameIdentifier)
                 ?? User.FindFirstValue(ClaimTypes.Name)
@@ -60,5 +60,56 @@ namespace TripWise.Api.Controllers
             var trips = await _trips.GetTripsForUserAsync(userId);
             return Ok(trips);
         }
+        // Get Trip by ID
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetTrip(string id)
+        {
+            var trip = await _trips.GetByIdAsync(id);
+            if (trip == null)
+                return NotFound();
+
+            var userId = GetUserId();
+            if (trip.CreatorId != userId)
+                return Unauthorized();
+
+            return Ok(trip);
+        }
+        // Update Trip
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateTrip(string id, UpdateTripDto dto)
+        {
+            var trip = await _trips.GetByIdAsync(id);
+            if (trip == null)
+                return NotFound();
+
+            var userId = GetUserId();
+            if (trip.CreatorId != userId)
+                return Unauthorized();
+
+            trip.Title = dto.Title;
+            trip.Destination = dto.Destination;
+            trip.StartDate = dto.StartDate;
+            trip.EndDate = dto.EndDate;
+
+            await _trips.UpdateAsync(id, trip);
+            return Ok(trip);
+        }
+        // Delete Trip
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTrip(string id)
+        {
+            var trip = await _trips.GetByIdAsync(id);
+            if (trip == null)
+                return NotFound();
+
+            var userId = GetUserId();
+            if (trip.CreatorId != userId)
+                return Unauthorized();
+
+            await _trips.DeleteAsync(id);
+            return Ok(new { message = "Trip deleted successfully." });
+        }
     }
+    
+
 }

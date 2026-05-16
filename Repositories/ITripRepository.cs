@@ -7,7 +7,7 @@ namespace TripWise.Api.Repositories
         Task<Trip> GetByIdAsync(string id);
         Task<List<Trip>> GetTripsForUserAsync(string userId);
         Task CreateAsync(Trip trip);
-        Task UpdateAsync(Trip trip);
+        Task UpdateAsync(string id, Trip trip);
         Task DeleteAsync(string id);
 
         // Activity operations
@@ -15,5 +15,6 @@ namespace TripWise.Api.Repositories
         Task AddActivityAsync(string tripId, Activity activity);
         Task UpdateActivityAsync(string tripId, Activity activity);
         Task DeleteActivityAsync(string tripId, string activityId);
+
     }
 }
