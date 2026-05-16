@@ -58,8 +58,11 @@ builder.Services.AddSingleton<IMongoDatabase>(sp =>
     var settings = sp.GetRequiredService<IOptions<MongoDbSettings>>().Value;
     return client.GetDatabase(settings.DatabaseName);
 });
+
+// Register repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITripRepository, TripRepository>();
+builder.Services.AddScoped<IDestinationRepository, DestinationRepository>();
 
 // API Versioning
 builder.Services.AddApiVersioning(options =>
