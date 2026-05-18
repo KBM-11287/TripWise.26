@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36717.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripWise.Api", "TripWise.Api.csproj", "{79734EAF-CD88-4900-AF29-252E0B93CA98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripWise.Mvc", "..\TripWise.Mvc\TripWise.Mvc.csproj", "{086F6105-B04D-43F0-BA97-0D5306C4CE6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{79734EAF-CD88-4900-AF29-252E0B93CA98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79734EAF-CD88-4900-AF29-252E0B93CA98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79734EAF-CD88-4900-AF29-252E0B93CA98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{086F6105-B04D-43F0-BA97-0D5306C4CE6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{086F6105-B04D-43F0-BA97-0D5306C4CE6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{086F6105-B04D-43F0-BA97-0D5306C4CE6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{086F6105-B04D-43F0-BA97-0D5306C4CE6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
