@@ -95,5 +95,13 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+
+// Run seeder
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<MongoSeeder>();
+    await seeder.SeedAsync();
+}
+
 app.Run();
  

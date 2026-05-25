@@ -8,18 +8,18 @@ namespace TripWise.Api.Config
     {
         private readonly IMongoCollection<User> _userCollection;
 
-        public MongoSeeder(IMongoCollection<User> usersCollection)
+        public MongoSeeder(IMongoDatabase database)
         {
-            _userCollection = usersCollection;
+            _userCollection = database.GetCollection<User>("Users");
         }
 
         public async Task SeedAsync()
         {
 
             // check if data already exists
-            var existingUsers = await _userCollection.CountDocumentsAsync(_ => true);
-            if (existingUsers == 0)
-            {
+            //var existingUsers = await _userCollection.CountDocumentsAsync(_ => true);
+            //if (existingUsers == 0)
+            //{
 
                 var users = new List<User>
             {
@@ -27,7 +27,8 @@ namespace TripWise.Api.Config
                 new User { Name = "Test User", Email = "test@example.com" }
             };
                 await _userCollection.InsertManyAsync(users);
-            }
+            Console.WriteLine("creATED USERS");
+            //}
         }
     }
 }
