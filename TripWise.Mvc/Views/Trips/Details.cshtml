@@ -1,0 +1,35 @@
+﻿@model TripWise.Mvc.Models.TripViewModel
+
+<h2>@Model.Title</h2>
+
+<p><strong>Destination:</strong> @Model.Destination</p>
+<p><strong>Dates:</strong> @Model.StartDate.ToShortDateString() - @Model.EndDate.ToShortDateString()</p>
+
+<h3>Activities</h3>
+
+@if (Model.Activities == null || !Model.Activities.Any())
+{
+    <p>No activities planned for this trip.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var act in Model.Activities)
+            {
+                <tr>
+                    <td>@act.Name</td>
+                    <td>@act.Type</td>
+                    <td>@act.Date.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
