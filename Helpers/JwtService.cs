@@ -4,7 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using TripWise.Api.Models;
 
-namespace TripWise.Api.Services
+namespace TripWise.Api.Helpers
 {
     public class JwtService
     {

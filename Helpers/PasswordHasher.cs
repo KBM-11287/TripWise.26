@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace TripWise.Api.Services
+namespace TripWise.Api.Helpers
 {
     public static class PasswordHasher
     {

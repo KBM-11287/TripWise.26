@@ -1,8 +1,5 @@
-﻿namespace TripWise.Api.Models.Dto
+﻿namespace TripWise.Api.DTOs.Activities
 {
-    public class ActivityDto
-    {
-    }
 
     public class CreateActivityDto
     {

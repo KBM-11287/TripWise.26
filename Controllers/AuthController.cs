@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TripWise.Api.Services;
 using TripWise.Api.Models;
-using TripWise.Api.Models.Dto;
 using TripWise.Api.Repositories;
 using Asp.Versioning;
+using TripWise.Api.Helpers;
+using TripWise.Api.DTOs.Auth;
 
 namespace TripWise.Api.Controllers
 {
@@ -22,7 +22,7 @@ namespace TripWise.Api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterDto dto)
+        public async Task<IActionResult> Register(RegisterRequest dto)
         {
             var existingUser = await _users.GetByEmailAsync(dto.Email);
             if (existingUser != null)
@@ -40,7 +40,7 @@ namespace TripWise.Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginDto dto)
+        public async Task<IActionResult> Login(LoginRequest dto)
         {
             var user = await _users.GetByEmailAsync(dto.Email);
             if (user == null)

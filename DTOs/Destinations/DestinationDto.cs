@@ -1,4 +1,4 @@
-﻿namespace TripWise.Api.Models.Dto
+﻿namespace TripWise.Api.DTOs.Destinations
 {
     public class CreateDestinationDto
     {

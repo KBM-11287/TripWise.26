@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using TripWise.Api.Models;
-using TripWise.Api.Models.Dto;
 using TripWise.Api.Repositories;
 using Asp.Versioning;
 using System.IdentityModel.Tokens.Jwt;
+using TripWise.Api.DTOs.Trips;
 
 namespace TripWise.Api.Controllers
 {

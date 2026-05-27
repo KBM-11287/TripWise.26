@@ -1,6 +1,6 @@
-﻿namespace TripWise.Api.Models.Dto
+﻿namespace TripWise.Api.DTOs.Auth
 {
-    public class RegisterDto
+    public class RegisterRequest
     {
         public string Name { get; set; }
         required

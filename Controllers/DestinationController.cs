@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using TripWise.Api.Repositories;
 using TripWise.Api.Models;
-using TripWise.Api.Models.Dto;
 using Asp.Versioning;
+using TripWise.Api.DTOs.Destinations;
 
 namespace TripWise.Api.Controllers
 {
