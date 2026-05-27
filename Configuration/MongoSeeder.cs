@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using TripWise.Api.Models;
 
-namespace TripWise.Api.Config
+namespace TripWise.Api.Configuration
 {
     public class MongoSeeder
     {

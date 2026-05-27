@@ -1,6 +1,6 @@
 using Asp.Versioning;
 using Microsoft.Extensions.Options;
-using TripWise.Api.Config;
+using TripWise.Api.Configuration;
 using MongoDB.Driver;
 using TripWise.Api.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

@@ -3,7 +3,7 @@ using System.Text;
 
 namespace TripWise.Api.Helpers
 {
-    public static class PasswordHasher
+    public class PasswordHasher
     {
         public static string Hash(string password)
         {

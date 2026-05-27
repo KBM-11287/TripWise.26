@@ -15,6 +15,6 @@ namespace TripWise.Api.Repositories
         Task AddActivityAsync(string tripId, Activity activity);
         Task UpdateActivityAsync(string tripId, Activity activity);
         Task DeleteActivityAsync(string tripId, string activityId);
-
+        Task<IEnumerable<object>> GetAllByUserAsync(string userId);
     }
 }

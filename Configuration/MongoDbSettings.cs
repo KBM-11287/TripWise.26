@@ -1,5 +1,5 @@
-﻿namespace TripWise.Api.Config
-{
+﻿namespace TripWise.Api.Configuration
+{ 
     public class MongoDbSettings
     {
         public string ConnectionString { get; set; }
