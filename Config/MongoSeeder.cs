@@ -27,7 +27,7 @@ namespace TripWise.Api.Config
                 new User { Name = "Test User", Email = "test@example.com" }
             };
                 await _userCollection.InsertManyAsync(users);
-            Console.WriteLine("creATED USERS");
+            Console.WriteLine("created USERS");
             //}
         }
     }
