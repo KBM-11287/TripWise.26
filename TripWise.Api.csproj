@@ -14,5 +14,7 @@
     <PackageReference Include="MongoDB.Driver" Version="3.8.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
-
+<ItemGroup>
+  <ProjectReference Include="..\TripWise.Shared\TripWise.Shared.csproj" />
+</ItemGroup>
 </Project>

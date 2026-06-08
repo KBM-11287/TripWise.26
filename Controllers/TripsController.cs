@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using TripWise.Api.DTOs.Activities;
+using TripWise.Api.DTOs.Trips;
 using TripWise.Api.Models;
 using TripWise.Api.Repositories;
-using Asp.Versioning;
-using System.IdentityModel.Tokens.Jwt;
-using TripWise.Api.DTOs.Trips;
+using TripWise.Api.Services;
 
 namespace TripWise.Api.Controllers
 {
@@ -16,11 +18,16 @@ namespace TripWise.Api.Controllers
     public class TripsController : ControllerBase
     {
         private readonly ITripRepository _trips;
+        private readonly ActivityService _activities;
+        
 
-        public TripsController(ITripRepository trips)
+        public TripsController(ITripRepository trips, ActivityService activities)
         {
             _trips = trips;
+            _activities = activities;
         }
+
+        // -------------------- TRIPS --------------------
 
         // Helper to get logged-in user ID from JWT
         private string? GetUserId()
@@ -109,7 +116,38 @@ namespace TripWise.Api.Controllers
             await _trips.DeleteAsync(id);
             return Ok(new { message = "Trip deleted successfully." });
         }
+
+        // -------------------- ACTIVITIES (NESTED) --------------------
+        [HttpPost("{tripId}/activities")]
+        public async Task<IActionResult> AddActivity(string tripId, CreateActivityDto dto)
+        {
+            var result = await _activities.AddAsync(tripId, dto);
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+        }
+
+        [HttpPut("{tripId}/activities/{activityId}")]
+        public async Task<IActionResult> UpdateActivity(string tripId, string activityId, UpdateActivityDto dto)
+        {
+            var result = await _activities.UpdateAsync(tripId, activityId, dto);
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+        }
+
+        [HttpDelete("{tripId}/activities/{activityId}")]
+        public async Task<IActionResult> DeleteActivity(string tripId, string activityId)
+        {
+            var success = await _activities.DeleteAsync(tripId, activityId);
+            if (!success)
+                return NotFound();
+
+            return NoContent();
+        }
     }
-    
+
 
 }
