@@ -15,7 +15,7 @@ namespace TripWise.Api.Services
 
         public async Task<List<TripResponse>> GetAllAsync(string userId)
         {
-            var trips = await _trips.GetAllByUserAsync(userId);
+            var trips = await _trips.GetTripsForUserAsync(userId);
             return trips.Select(t => t.ToTripResponse()).ToList();
         }
 
@@ -25,20 +25,20 @@ namespace TripWise.Api.Services
             return trip?.ToTripResponse();
         }
 
-        public async Task<TripResponse> CreateAsync(string userId, TripDto.Create model)
+        public async Task<TripResponse> CreateAsync(string userId, CreateTripDto model)
         {
             var trip = model.ToTrip(userId);
             await _trips.CreateAsync(trip);
             return trip.ToTripResponse();
         }
 
-        public async Task<TripResponse> UpdateAsync(string id, TripDto.Update model)
+        public async Task<TripResponse> UpdateAsync(string id, UpdateTripDto model)
         {
             var trip = await _trips.GetByIdAsync(id);
             if (trip == null) return null;
 
             model.ApplyTo(trip);
-            await _trips.UpdateAsync(trip);
+            await _trips.UpdateAsync(id, trip);
 
             return trip.ToTripResponse();
         }
