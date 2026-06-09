@@ -23,8 +23,8 @@ namespace TripWise.Api.Configuration
 
                 var users = new List<User>
             {
-                new User { Name = "Admin", Email = "admin@example.com" },
-                new User { Name = "Test User", Email = "test@example.com" }
+                new User { Name = "Admin", Email = "admin@example.com", PasswordHash = "hashed_password" },
+                new User { Name = "Test User", Email = "test@example.com", PasswordHash = "hashed_password" }
             };
                 await _userCollection.InsertManyAsync(users);
             Console.WriteLine("created USERS");

@@ -19,24 +19,24 @@ namespace TripWise.Api.Mappings
         }
 
         // UPDATE DTO → apply to Destination
-        public static void ApplyTo(this UpdateDestinationDto dto, Destination dest)
+        public static void ApplyTo(this UpdateDestinationDto dto, Destination destination)
         {
-            dest.DestinationName = dto.DestinationName;
-            dest.Coordinates = new GeoJsonPoint
+            destination.DestinationName = dto.DestinationName;
+            destination.Coordinates = new GeoJsonPoint
             {
                 Coordinates = new[] { dto.Longitude, dto.Latitude }
             };
         }
 
         // Destination → DestinationResponse
-        public static DestinationResponse ToDestinationResponse(this Destination dest)
+        public static DestinationResponse ToDestinationResponse(this Destination destination)
         {
             return new DestinationResponse
             {
-                Id = dest.Id,
-                DestinationName = dest.DestinationName,
-                Latitude = dest.Coordinates.Coordinates[1],
-                Longitude = dest.Coordinates.Coordinates[0]
+                Id = destination.Id,
+                DestinationName = destination.DestinationName,
+                Latitude = destination.Coordinates.Coordinates[1],
+                Longitude = destination.Coordinates.Coordinates[0]
             };
         }
     }

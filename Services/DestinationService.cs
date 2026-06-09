@@ -19,24 +19,29 @@ namespace TripWise.Api.Services
             return list.Select(d => d.ToDestinationResponse()).ToList();
         }
 
-        public async Task<DestinationResponse> CreateAsync(DestinationDto.Create model)
+        public async Task<DestinationResponse> CreateAsync(CreateDestinationDto dto)
         {
-            var dest = model.ToDestination();
-            await _destinations.CreateAsync(dest);
-            return dest.ToDestinationResponse();
+            var destination = dto.ToDestination();
+            await _destinations.CreateAsync(destination);
+            return destination .ToDestinationResponse();
         }
 
-        public async Task<DestinationResponse> UpdateAsync(string id, DestinationDto.Update model)
+        public async Task<DestinationResponse> UpdateAsync(string id, UpdateDestinationDto dto)
         {
-            var dest = await _destinations.GetByIdAsync(id);
-            if (dest == null) return null;
+            var destination = await _destinations.GetByIdAsync(id);
+            if (destination == null) return null;
 
-            model.ApplyTo(dest);
-            await _destinations.UpdateAsync(dest);
-
-            return dest.ToDestinationResponse();
+            dto.ApplyTo(destination);
+            await _destinations.UpdateAsync(id, destination);   
+            return destination.ToDestinationResponse();
         }
 
-        public Task DeleteAsync(string id) => _destinations.DeleteAsync(id);
+        public async Task<bool> DeleteAsync(string id)
+        {
+            var existing = await _destinations.GetByIdAsync(id);
+            if(existing == null) return false;
+            await _destinations.DeleteAsync(id);
+            return true;
+        }
     }
 }
