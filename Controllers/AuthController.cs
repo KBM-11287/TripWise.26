@@ -26,7 +26,7 @@ namespace TripWise.Api.Controllers
         {
             var existingUser = await _users.GetByEmailAsync(dto.Email);
             if (existingUser != null)
-                return BadRequest("User with this email already exists.");
+                return BadRequest(new { error = "User with this email already exists." });
 
             var user = new User
             {
@@ -36,7 +36,8 @@ namespace TripWise.Api.Controllers
             };
 
             await _users.CreateAsync(user);
-            return Ok(new { message = "User registered successfully." });
+            var token = _jwt.GenerateToken(user);
+            return Ok(new { token });
         }
 
         [HttpPost("login")]
