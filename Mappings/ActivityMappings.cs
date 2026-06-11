@@ -1,5 +1,6 @@
 ﻿using TripWise.Api.DTOs.Activities;
 using TripWise.Api.Models;
+using MongoDB.Bson;
 
 namespace TripWise.Api.Mappings
 {
@@ -10,6 +11,7 @@ namespace TripWise.Api.Mappings
         {
             return new Activity
             {
+                Id = ObjectId.GenerateNewId().ToString(),
                 Name = dto.Name,
                 Type = dto.Type,
                 Description = dto.Description,

@@ -3,11 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using TripWise.Api.DTOs.Activities;
 using TripWise.Api.DTOs.Trips;
 using TripWise.Api.Services;
+using Asp.Versioning;
+using System.Security.Claims;
 
 namespace TripWise.Api.Controllers
 {
     [ApiController]
-    [Route("api/trips")]
+    [Route("api/v{version:apiVersion}/trips")]
+    [ApiVersion("1.0")]
     [Authorize]
     public class TripsController : ControllerBase
     {
@@ -25,8 +28,13 @@ namespace TripWise.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var userId = User.FindFirst("id")?.Value;
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            
+            if(string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
             var result = await _trips.GetAllAsync(userId);
+
             return Ok(result);
         }
 
@@ -43,8 +51,13 @@ namespace TripWise.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateTripDto dto)
         {
-            var userId = User.FindFirst("id")?.Value;
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
             var result = await _trips.CreateAsync(userId, dto);
+
             return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
         }
 

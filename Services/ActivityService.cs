@@ -47,10 +47,12 @@ namespace TripWise.Api.Services
             var trip = await _trips.GetByIdAsync(tripId);
             if (trip == null) return false;
 
-           var removed =  trip.Activities.RemoveAll(a => a.Id == activityId) > 0;
+            var removed = trip.Activities.RemoveAll(a => a.Id == activityId) > 0;
 
-            if(removed)
-                await _trips.UpdateAsync(tripId, trip);
+            if (!removed)
+            { return false; }
+
+            await _trips.UpdateAsync(tripId, trip);
 
             return true;
         }

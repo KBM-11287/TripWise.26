@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TripWise.Api.Helpers;
+using TripWise.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,6 +66,13 @@ builder.Services.AddSingleton<IMongoDatabase>(sp =>
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITripRepository, TripRepository>();
 builder.Services.AddScoped<IDestinationRepository, DestinationRepository>();
+
+
+// Register services
+builder.Services.AddScoped<TripService>();
+builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<DestinationService>();
+builder.Services.AddScoped<ActivityService>();
 
 // Register MongoSeeder
 builder.Services.AddScoped<MongoSeeder>();

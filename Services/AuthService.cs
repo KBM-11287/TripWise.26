@@ -9,13 +9,13 @@ namespace TripWise.Api.Services
     {
         private readonly IUserRepository _users;
         private readonly JwtService _jwt;
-        private readonly PasswordHasher _hasher;
+       
 
-        public AuthService(IUserRepository users, JwtService jwt, PasswordHasher hasher)
+        public AuthService(IUserRepository users, JwtService jwt)
         {
             _users = users;
             _jwt = jwt;
-            _hasher = hasher;
+            
         }
 
         public async Task<AuthResponse> RegisterAsync(RegisterRequest request)

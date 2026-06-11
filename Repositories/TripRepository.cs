@@ -27,7 +27,7 @@ namespace TripWise.Api.Repositories
 
         public async Task UpdateAsync(string id,Trip trip)
         {
-            await _trips.ReplaceOneAsync(t => t.Id == trip.Id, trip);
+            await _trips.ReplaceOneAsync(t => t.Id == id, trip);
         }
 
         public async Task DeleteAsync(string id)

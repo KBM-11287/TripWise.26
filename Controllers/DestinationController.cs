@@ -8,7 +8,7 @@ using TripWise.Api.DTOs.Destinations;
 namespace TripWise.Api.Controllers
 {
     [ApiController]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/v{version:apiVersion}/destination")]
     [ApiVersion("1.0")]
     [Authorize]
     public class DestinationController : ControllerBase
